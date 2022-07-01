@@ -9,7 +9,18 @@
 
 def even_number_of_evens(numbers):
     if isinstance(numbers, list):
-        return True
+        if numbers == []:
+            return False
+        else:
+            evens = 0
+            
+        for n in numbers:
+            if n % 2 == 0:
+                evens += 1
+        if evens:
+            return evens % 2 == 0  # will return true if number of 'evens' is even
+        else:
+            return False
     else:
         raise TypeError("A List was not passed into the function")
 

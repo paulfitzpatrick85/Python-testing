@@ -10,11 +10,12 @@ class TestEvens(unittest.TestCase):
 # assertRaises is called from TestCase, check if typeError is thrown
 #  when funct is run with value of 4
 
+# check if empty list has been passed in, and expects false.
     def test_values_in_list(self):
         self.assertEqual(even_number_of_evens([]), False)
-    # self.assertEqual(even_number_of_evens([2, 4]), True)
-    # self.assertEqual(even_number_of_evens([2]), False)
-    # self.assertEqual(even_number_of_evens([1, 3, 5]), False)
+        self.assertEqual(even_number_of_evens([2, 4]), True)
+        self.assertEqual(even_number_of_evens([2]), False)
+        self.assertEqual(even_number_of_evens([1, 3, 5]), False)
 
 
 # when python runs a file directly it names it 'main
