@@ -17,6 +17,11 @@ class TestStudent(unittest.TestCase):
 
         self.assertTrue(student.naughty_list)  # only one arg is passed as it's checking for true/false rather than comparing
 
+    def test_email(self):
+        student = Student("John", "Doe")
+
+        self.assertEqual(student.email, "john.doe@email.com")
+
 
 # run test without having to specify unittest module
 if __name__ == "__main__":
