@@ -1,7 +1,7 @@
 from datetime import date, timedelta
 
 
-class student:
+class Student:
     """A student class as base for method testing"""
     def __init__(self, first_name, last_name):
         self._first_name = first_name   # prepend '_' so other dev's know it is for read only
