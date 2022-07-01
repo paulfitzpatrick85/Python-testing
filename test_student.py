@@ -4,23 +4,42 @@ from student import Student
 
 class TestStudent(unittest.TestCase):
 
+    @classmethod
+    def setUpClass(cls):  # addind cls to classmethod decorator acts on class method instead of instance of the class
+        print('setUpClass')
+
+    @classmethod
+    def tearDownClass(cls):
+        print('tearDownClass')
+
+    def setUp(self):  
+        print('setUp')
+        self.student = Student('John', 'Doe')
+        # self must be added to every referance to self.student now self.student is an instance variable
+
+    def tearDown(self):  # let us see when teardown is run
+        print('tearDown')
+
     def test_full_name(self):
+        print('test_full_name')  # show when test is run
         # create instance of student
-        student = Student("John", "Doe")
+        # student = Student("John", "Doe")  --- removed due to 'setUp' for refactoring/d.r.y
         # use asset equal to see if calling full name method returns expected value
         # in this case, the first and last name sep by a space
-        self.assertEqual(student.full_name, 'John Doe')
+        self.assertEqual(self.student.full_name, 'John Doe')
 
     def test_alert_santa(self):
-        student = Student("John", "Doe")
-        student.alert_santa()
+        print('test_alert_santa')
+        # student = Student("John", "Doe")
+        self.student.alert_santa()
 
-        self.assertTrue(student.naughty_list)  # only one arg is passed as it's checking for true/false rather than comparing
+        self.assertTrue(self.student.naughty_list)  # only one arg is passed as it's checking for true/false rather than comparing
 
     def test_email(self):
-        student = Student("John", "Doe")
+        print('test_email')
+        # student = Student("John", "Doe")
 
-        self.assertEqual(student.email, "john.doe@email.com")
+        self.assertEqual(self.student.email, "john.doe@email.com")
 
 
 # run test without having to specify unittest module

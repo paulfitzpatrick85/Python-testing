@@ -14,7 +14,6 @@ class Student:
     def full_name(self):
         return f"{self._first_name} {self._last_name}"
 
-
     def alert_santa(self):    # green for alert_santa funct
         self.naughty_list = True
 
