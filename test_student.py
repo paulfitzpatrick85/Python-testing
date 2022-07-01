@@ -11,6 +11,13 @@ class TestStudent(unittest.TestCase):
         # in this case, the first and last name sep by a space
         self.assertEqual(student.full_name, 'John Doe')
 
+    def test_alert_santa(self):
+        student = Student("John", "Doe")
+        student.alert_santa()
+
+        self.assertTrue(student.naughty_list)  # only one arg is passed as it's checking for true/false rather than comparing
+
+
 # run test without having to specify unittest module
 if __name__ == "__main__":
     unittest.main()
