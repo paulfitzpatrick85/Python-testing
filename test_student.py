@@ -1,6 +1,8 @@
 import unittest
 from student import Student
 from datetime import timedelta
+from unittest.mock import patch   # patch can be used as decorator or context manager
+
 
 
 class TestStudent(unittest.TestCase):
@@ -48,9 +50,25 @@ class TestStudent(unittest.TestCase):
     def test_apply_extension(self):
         old_end_date = self.student.end_date  # redeclare current instance of end date
         self.student.apply_extension(5)  # number of days required
-        # print('test_apply_extension')
         # check if end_date is same as old_end_Date plus time delta of 5 days
         self.assertEqual(self.student.end_date, old_end_date + timedelta(days=5)) 
+
+
+    def test_course_schedule_success(self):
+        with patch("student.requests.get") as mocked_get:  # create obj 'mocked_get' to test get functionality
+            mocked_get.return_value.ok = True       # mocked return of success
+            mocked_get.return_value.text = "Success"  # mocked return of success
+
+            schedule = self.student.course_schedule()
+            self.assertEqual(schedule, "Success")  # compare shedule(which holds response text for successful call) with the string 'Success'
+
+
+    def test_course_schedule_failed(self):
+        with patch("student.requests.get") as mocked_get:  # create obj 'mocked_get' to test get functionality
+            mocked_get.return_value.ok = False       # mocked return of success
+            
+            schedule = self.student.course_schedule()
+            self.assertEqual(schedule, "Something went wrong with the request!")  # compare shedule(which holds response text for successful call) with the string 'Success'
 
 
 # run test without having to specify unittest module
