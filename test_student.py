@@ -1,5 +1,6 @@
 import unittest
 from student import Student
+from datetime import timedelta
 
 
 class TestStudent(unittest.TestCase):
@@ -28,6 +29,7 @@ class TestStudent(unittest.TestCase):
         # in this case, the first and last name sep by a space
         self.assertEqual(self.student.full_name, 'John Doe')
 
+
     def test_alert_santa(self):
         print('test_alert_santa')
         # student = Student("John", "Doe")
@@ -35,11 +37,20 @@ class TestStudent(unittest.TestCase):
 
         self.assertTrue(self.student.naughty_list)  # only one arg is passed as it's checking for true/false rather than comparing
 
+
     def test_email(self):
         print('test_email')
         # student = Student("John", "Doe")
 
         self.assertEqual(self.student.email, "john.doe@email.com")
+
+
+    def test_apply_extension(self):
+        old_end_date = self.student.end_date  # redeclare current instance of end date
+        self.student.apply_extension(5)  # number of days required
+        # print('test_apply_extension')
+        # check if end_date is same as old_end_Date plus time delta of 5 days
+        self.assertEqual(self.student.end_date, old_end_date + timedelta(days=5)) 
 
 
 # run test without having to specify unittest module
